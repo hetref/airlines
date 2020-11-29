@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <title>Cancel a Flight</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid">
+          <a class="navbar-brand mt-0 mb-0 pt-0 pb-0" href="mainPage.html"><h2>Airlines</h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="mainPage.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="bookingTabPage.html">Bookings</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="mx-auto d-block text-center pt-5">
+        <h2>Flight Details</h2>
+        
+        <input type="text" id="flightName" placeholder="Flight Name" class="border-top-0 border-right-0 border-left-0">
+    
+        <br><br><input type="text" id="fromPlace" placeholder="From" class="border-top-0 border-right-0 border-left-0">
+    
+        <br><br><input type="text" id="toPlace" placeholder="To" class="border-top-0 border-right-0 border-left-0">
+    
+        <br><br><input type="text" id="firstName" placeholder="First Name" class="border-top-0 border-right-0 border-left-0">
+    
+        <br><br><input type="text" id="lastName" placeholder="Last Name" class="border-top-0 border-right-0 border-left-0">
+    
+        <br><br><input type="number" id="phoneNumber" placeholder="Phone Number" class="border-top-0 border-right-0 border-left-0">
+    
+    <br><br>
+        <button id="bookBtn" class="btn btn-info" onclick="bookNowFunc()">Cancel Flight</button>
+    
+    </div>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-database.js"></script>
+
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyDdpubWS59J5fxzO-goNrmSBFni5U5-LhA",
+            authDomain: "airlineswebsite-bcbe8.firebaseapp.com",
+            databaseURL: "https://airlineswebsite-bcbe8.firebaseio.com",
+            projectId: "airlineswebsite-bcbe8",
+            storageBucket: "airlineswebsite-bcbe8.appspot.com",
+            messagingSenderId: "528135116162",
+            appId: "1:528135116162:web:4ccee1b30567023a662b9b",
+            measurementId: "G-RGKTM6TSJJ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        var database = firebase.database();
+
+        const flightName = document.getElementById("flightName");
+
+        const  fromPlace = document.getElementById("fromPlace");
+
+        const toPlace = document.getElementById("toPlace");
+
+        const firstName = document.getElementById("firstName");
+
+        const lastName = document.getElementById("lastName");
+
+        const phoneNumber = document.getElementById("phoneNumber");
+
+        const bookBtn = document.getElementById("bookBtn");
+        
+        const cancelFlight = "Flight Cancelled";
+
+        function bookNowFunc() {
+                firebase.database().ref('Bookings/' + " " + firstName.value).set({
+                    flight_name: flightName.value,
+                    from_place: fromPlace.value,
+                    to_place: toPlace.value,
+                    first_name: firstName.value,
+                    last_name: lastName.value,
+                    phone_number: phoneNumber.value,
+                    cancel_flight: cancelFlight
+                });
+                alert("Your Fight has been cancelled");
+        }
+    </script>
+
+</body>
+</html>
